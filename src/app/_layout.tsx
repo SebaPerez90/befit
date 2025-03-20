@@ -9,6 +9,7 @@ import { drizzle } from "drizzle-orm/expo-sqlite";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import migrations from "../drizzle/migrations";
 import { usersTable } from "@/src/db/schema";
+import "../styles/global.css";
 
 const expo = SQLite.openDatabaseSync("db.db");
 const db = drizzle(expo);
@@ -33,6 +34,11 @@ export default function RootLayout() {
           age: 30,
           email: "sebastian@example.com",
         },
+        {
+          name: "Sebastian",
+          age: 30,
+          email: "pepeaguilar@example.com",
+        },
       ]);
       const users = await db.select().from(usersTable);
       setItems(users);
@@ -50,6 +56,7 @@ export default function RootLayout() {
         justifyContent: "center",
       }}
     >
+      <Text className="text-blue-500 text-5xl">nombres</Text>
       {items?.map((item) => (
         <Text key={item.id}>{item.email}</Text>
       ))}
