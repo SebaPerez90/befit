@@ -1,29 +1,15 @@
-import { View, Text, Pressable } from "react-native";
-import React from "react";
+import React from 'react';
+import { CustomText } from '../modules/core/components/CustomText';
+import { ScreenView } from '../modules/core/components/ScreenView';
 
 export default function index() {
   return (
-    <View
-      style={{
-        backgroundColor: "#000",
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text style={{ color: "#fff" }}>Hello world!</Text>
-      <Pressable
-        style={{
-          paddingVertical: 6,
-          paddingHorizontal: 12,
-          borderRadius: 6,
-          backgroundColor: "lightblue",
-          marginTop: 10,
-        }}
-        onPress={() => alert("You touched the button!")}
-      >
-        <Text style={{ fontWeight: 400 }}>Press me!</Text>
-      </Pressable>
-    </View>
+    <ScreenView>
+      <CustomText type='title'>Hello World!</CustomText>
+      <CustomText type='subtitle'>Hello World!</CustomText>
+      <CustomText type='defaultSemiBold'>Hello World!</CustomText>
+      <CustomText>Hello World!</CustomText>
+      <CustomText type='link'>Hello World!</CustomText>
+    </ScreenView>
   );
 }
