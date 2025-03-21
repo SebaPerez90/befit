@@ -4,7 +4,9 @@ import { ScreenView } from '../modules/core/components/ScreenView';
 
 export default function index() {
   return (
-    <ScreenView>
+    <ScreenView
+      align='start'
+      style={{ justifyContent: 'flex-end' }}>
       <CustomText type='title'>Hello World!</CustomText>
       <CustomText type='subtitle'>Hello World!</CustomText>
       <CustomText type='defaultSemiBold'>Hello World!</CustomText>

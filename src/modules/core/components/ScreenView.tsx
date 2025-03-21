@@ -1,6 +1,7 @@
-import { View, type ViewProps } from 'react-native';
+import { StyleSheet, View, type ViewProps } from 'react-native';
 
 import { useThemeColor } from '@/src/modules/core/hooks/useThemeColor';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export type ThemedViewProps = ViewProps & {
   lightColor?: string;
@@ -15,6 +16,7 @@ export function ScreenView({
   darkColor,
   ...rest
 }: ThemedViewProps) {
+  const insets = useSafeAreaInsets();
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     'background'
@@ -22,15 +24,36 @@ export function ScreenView({
 
   return (
     <View
-      className={`${
-        align === 'center'
-          ? 'justify-center items-center'
-          : align === 'start'
-          ? 'justify-center items-start'
-          : align === 'end' && 'justify-center items-end'
-      } flex flex-1`}
-      style={[{ backgroundColor }, style]}
+      style={[
+        {
+          backgroundColor,
+          flex: 1,
+          paddingTop: insets.top,
+          paddingLeft: 15,
+          paddingBottom: 10,
+          paddingRight: 15,
+        },
+        align === 'center' ? styles.center : undefined,
+        align === 'start' ? styles.start : undefined,
+        align === 'end' ? styles.end : undefined,
+        style,
+      ]}
       {...rest}
     />
   );
 }
+
+const styles = StyleSheet.create({
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  start: {
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  end: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+});
