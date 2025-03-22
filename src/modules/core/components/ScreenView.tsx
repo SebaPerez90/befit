@@ -1,7 +1,7 @@
-import { StyleSheet, View, type ViewProps } from 'react-native';
+import { StyleSheet, type ViewProps } from 'react-native';
 
 import { useThemeColor } from '@/src/modules/core/hooks/useThemeColor';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export type ThemedViewProps = ViewProps & {
   lightColor?: string;
@@ -16,21 +16,19 @@ export function ScreenView({
   darkColor,
   ...rest
 }: ThemedViewProps) {
-  const insets = useSafeAreaInsets();
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     'background'
   );
 
   return (
-    <View
+    <SafeAreaView
+      edges={['top', 'right', 'bottom', 'left']}
       style={[
         {
           backgroundColor,
           flex: 1,
-          paddingTop: insets.top,
           paddingLeft: 15,
-          paddingBottom: 10,
           paddingRight: 15,
         },
         align === 'center' ? styles.center : undefined,
